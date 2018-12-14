@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>CC Admin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+
+<body>
+<div class="access-intro">
+    <div class="border-box">
+        <div class="header">
+            <h2>Welcome to Currency Converter (Admin)!</h2>
+            <p th:text="'The service has been used ' + ${transCount} + ' times!'"></p>
+        </div>
+        <section>
+            <h1>All rates</h1>
+            <table>
+                <tr th:each="r:${rates}">
+                    <td th:text="${r.getExFrom()}"></td>
+                    <td>-</td>
+                    <td th:text="${r.getExTo()}"></td>
+                    <td>:</td>
+                    <td th:text="${r.getExRate()}"></td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h1>Add new values</h1>
+            <p>Choose the values and their exchange rate:</p>
+            <form th:action="@{/admin}" th:object="${convertForm}" method="post">
+                <table>
+                    <tr>
+                        <td>
+                            <p>From:</p>
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{exchangeFrom}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>To:</p>
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{exchangeTo}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Amount:</p>
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{exchangeAmount}" id="exAmount">
+                        </td>
+                    </tr>
+                </table>
+                <span class="error" th:if="${error}">These values are already in the database!</span>
+                <p class="submit"><input type="submit" value="Add"></p>
+            </form>
+        </section>
+        <section th:if="${result}">
+            <p th:text="${result}"></p>
+        </section>
+    </div>
+</div>
+</body>
+</html>
