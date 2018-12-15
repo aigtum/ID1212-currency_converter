@@ -40,9 +40,4 @@ public class ExCount implements ExCountDTO {
     // required by JPA
     protected ExCount() {}
 
-
-    @Override
-    public void increaseCount() {
-
-    }
 }

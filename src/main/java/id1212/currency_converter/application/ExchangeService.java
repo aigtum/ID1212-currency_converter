@@ -21,10 +21,11 @@ public class ExchangeService {
 
     public void createDefaultRates() {
         System.out.println("Creating default values");
-        createRate("USD", "SEK", 6.7);
-        createRate("NOK", "SEK", 1.1);
-        createRate("USD", "NOK", 6.0);
-        createRate("EUR", "USD", 1.14);
+        createRate("EUR", "USD", 1.13);
+        createRate("USD", "EUR", 0.88);
+        createRate("USD", "SEK", 9.06);
+        createRate("NOK", "SEK", 1.05);
+        createRate("GBP", "NOK", 10.85);
     }
 
     public List<Rate> getAllRates() {

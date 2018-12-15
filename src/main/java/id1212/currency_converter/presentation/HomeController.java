@@ -36,6 +36,10 @@ public class HomeController {
     @PostMapping("/")
     public String convert(@Valid ConvertForm convertForm, BindingResult bindingResult, Model model) {
         List<Rate> allRates = service.getAllRates();
+        if (!instantiated) {
+            instantiated = true;
+            service.createDefaultRates();
+        }
         model.addAttribute("rates", allRates);
         if (bindingResult.hasErrors()) {
             model.addAttribute("error", "The entered amount must be a number!");
@@ -71,6 +75,10 @@ public class HomeController {
     @PostMapping("/admin")
     public String add(@Valid ConvertForm convertForm, BindingResult bindingResult, Model model) {
         model.addAttribute("transCount", service.getTransactionCount());
+        if (!instantiated) {
+            instantiated = true;
+            service.createDefaultRates();
+        }
         if (bindingResult.hasErrors()) {
             System.out.println("Error binding result: " + bindingResult);
         }
