@@ -37,11 +37,12 @@ public class ExchangeService {
     }
 
     public boolean createRate(String fromRate, String toRate, double value) {
-        System.out.println("Saving: " + fromRate + ", " + toRate);
-        if(rateRepo.findRateByExFromAndAndExTo(fromRate, toRate) == null) {
+        if(rateRepo.findRateByExFromAndAndExTo(fromRate, toRate) == null && !fromRate.equals("") && !toRate.equals("") && value != 0.0) {
+            System.out.println("Saving: " + fromRate + ", " + toRate);
             rateRepo.save(new Rate(fromRate, toRate, value));
             return true;
         } else {
+            System.out.println("Error saving value");
             return false;
         }
     }
