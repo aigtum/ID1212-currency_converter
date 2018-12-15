@@ -58,13 +58,13 @@
                         </td>
                     </tr>
                 </table>
-                <span class="error" th:if="${error}">Something went wrong! Please try again!</span>
+                <span class="error" th:if="${error}"><p th:text="${error}"></p></span>
 
                 <p class="submit"><input type="submit" value="Convert"></p>
             </form>
         </section>
-        <section th:if="${result}">
-            <h3>Result: <p th:text="${result}"></p> </h3>
+        <section th:if="${result}" class="header">
+            <h2>Result: <p th:text="${result}"></p> </h2>
         </section>
     </div>
 

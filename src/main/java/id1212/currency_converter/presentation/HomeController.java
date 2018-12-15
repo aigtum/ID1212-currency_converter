@@ -35,7 +35,10 @@ public class HomeController {
 
     @PostMapping("/")
     public String convert(@Valid ConvertForm convertForm, BindingResult bindingResult, Model model) {
+        List<Rate> allRates = service.getAllRates();
+        model.addAttribute("rates", allRates);
         if (bindingResult.hasErrors()) {
+            model.addAttribute("error", "The entered amount must be a number!");
             System.out.println("Error binding result: " + bindingResult);
         }
         double exchange = service.exchange(
@@ -43,7 +46,7 @@ public class HomeController {
                 convertForm.getExchangeTo().toUpperCase(),
                 convertForm.getExchangeAmount());
         if (exchange == -1.0) {
-            model.addAttribute("error", "Something went wrong");
+            model.addAttribute("error", "Sorry, we don't have that currency!");
         } else {
             model.addAttribute("result", exchange);
         }
